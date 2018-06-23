@@ -3,5 +3,5 @@ to run tests:
   - $ node test.js
 
 to run real deal
-  - cd into src
-  - $ node main.js
+  - be in this directory
+  - $ node src/main.js
