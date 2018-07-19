@@ -1,4 +1,3 @@
-require('../polyfills');
 var Locator = require('../src/location/locator');
 
 const tests = [];
@@ -26,8 +25,10 @@ tests.forEach(test => {
   }
   try {
     const result = test.fn();
-    if (result !== false) {
+    if (result === true || typeof result === 'object') {
       console.log(`  \u2714 ${test.name}`);
+    } else if (result === undefined) {
+      throw 'returned undefined / did not return';
     } else {
       throw 'returned false';
     }

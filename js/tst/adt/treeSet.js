@@ -34,7 +34,7 @@ test('can add a lot', () => {
   const A = 'oiaoinisefoseifmscoisneizoAfajsoie;jfqew.,xvf'.split('');
   const B = ';.,+'.split('');
   const AMinusB = 'oiaoinisefoseifmscoisneizoAfajsoiejfqewxvf'.split('');
-  TreeSet()
+  return TreeSet()
     .addAll(A)
     .removeAll(B)
     .hasAll(AMinusB);

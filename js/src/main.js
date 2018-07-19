@@ -1,24 +1,11 @@
-require('../polyfills');
-//given a directory, find all the javascript files in that directory
-var Locator = require('./location/locator')('.');
+const directory = process.argv[2] || '.';
 
-const files = Locator.getFiles().toArray();
+const Locator = require('./location/locator')(directory);
 
-var getRequires = require('./parsing/getRequires');
-const depGraph = files.reduce( (depGraph, nextFile) => {
-  depGraph[nextFile] = getRequires(nextFile);
-  return depGraph;
-}, {});
+const Parser = require('./parsing/parser')(Locator.getFiles().toArray());
 
-console.log(depGraph);
+const Grapher = require('./graphing/grapher')(Parser.getDepGraph());
 
+const Printer = require('./printing/printer')(Grapher.getGraph());
 
-// //given a file, find the names of the required files
-// var parser = require('./parser');
-
-// //construct a graph of file dependencies
-// var grapher = require('./grapher');
-
-// //print a graph of dependencies
-// var printer = require('./printer');
-
+console.log(Printer.toXdot());
